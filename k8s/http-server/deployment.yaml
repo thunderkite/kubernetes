@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+  namespace: website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+      - name: server
+        image: khanasis/server:0.0.1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+        ports:
+        - containerPort: 5000
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+  namespace: website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+      - name: client
+        image: khanasis/client:0.0.1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1024Mi

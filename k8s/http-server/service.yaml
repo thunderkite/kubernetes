@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: website
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+  namespace: website
+spec:
+  type: NodePort
+  selector:
+    app: server
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+    nodePort: 30100

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cpu-test
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: py-http-server
+  namespace: cpu-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: py-http-server
+  template:
+    metadata:
+      labels:
+        app: py-http-server
+    spec:
+      containers:
+      - name: server
+        image: khanasis/fask-app:0.0.1
+        ports:
+        - containerPort: 8080
+          name: web

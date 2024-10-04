@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+  namespace: home
+  annotations:
+    metallb.universe.tf/loadBalancerIPs: 192.168.10.14
+spec:
+  type: LoadBalancer
+  selector:
+    app: example
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
